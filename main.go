@@ -33,7 +33,8 @@ func main() {
 	})
 	p := image.NewPaletted(img.Bounds(), palette)
 	draw.Draw(p, p.Bounds(), img, image.ZP, draw.Src)
-	if err := png.Encode(os.Stdout, p); err != nil {
+	e := png.Encoder{CompressionLevel: png.BestCompression}
+	if err := e.Encode(os.Stdout, p); err != nil {
 		log.Fatal(err)
 	}
 }
